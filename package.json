@@ -18,7 +18,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "dev": "concurrently \"npm start\" \"nodemon --watch src\"",
-    "build:widget": "node scripts/build.js"
+    "build:widget": "node scripts/build.js",
+    "serve": "node scripts/serve.js"
   },
   "eslintConfig": {
     "extends": [
@@ -42,6 +43,7 @@
     "concurrently": "^9.1.2",
     "esbuild": "^0.19.12",
     "esbuild-css-modules-plugin": "^3.1.4",
+    "express": "^4.21.2",
     "nodemon": "^3.1.9"
   }
 }

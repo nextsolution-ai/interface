@@ -1,28 +1,27 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import { interact, saveTranscript } from '../../api/voiceflow';
-import './ChatBot.css';
 
 const ChatBot = ({ apiKey, projectId, versionId, theme = {} }) => {
-    const [messages, setMessages] = useState([]);
-    const [input, setInput] = useState('');
-    const [buttons, setButtons] = useState([]);
-    const [sessionId, setSessionId] = useState('');
-    const [isOpen, setIsOpen] = useState(false);
-    const messagesEndRef = useRef(null);
+    const [messages, setMessages] = React.useState([]);
+    const [input, setInput] = React.useState('');
+    const [buttons, setButtons] = React.useState([]);
+    const [sessionId, setSessionId] = React.useState('');
+    const [isOpen, setIsOpen] = React.useState(false);
+    const messagesEndRef = React.useRef(null);
 
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     };
 
-    useEffect(() => {
+    React.useEffect(() => {
         scrollToBottom();
     }, [messages]);
 
-    useEffect(() => {
+    React.useEffect(() => {
         setSessionId(`user-${Date.now()}`);
     }, []);
 
-    useEffect(() => {
+    React.useEffect(() => {
         let mounted = true;
         
         if (isOpen && messages.length === 0 && sessionId) {
@@ -131,7 +130,6 @@ const ChatBot = ({ apiKey, projectId, versionId, theme = {} }) => {
         '--primary-color': theme.primaryColor || '#007bff',
         '--text-color': theme.textColor || '#333',
         '--background-color': theme.backgroundColor || '#fff',
-        // ... other theme variables
     };
 
     return (

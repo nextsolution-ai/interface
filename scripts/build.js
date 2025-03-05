@@ -1,5 +1,4 @@
 const esbuild = require('esbuild');
-const cssModulesPlugin = require('esbuild-css-modules-plugin');
 
 esbuild.build({
   entryPoints: ['src/widget.js'],
@@ -13,9 +12,8 @@ esbuild.build({
   loader: {
     '.js': 'jsx',
     '.jsx': 'jsx',
-    '.css': 'css'
+    '.css': 'text'
   },
-  plugins: [cssModulesPlugin()],
   define: {
     'process.env.NODE_ENV': '"production"',
     'process.env.REACT_APP_VOICEFLOW_API_KEY': '"VF.DM.67c85533afdb459652c6488d.s4Xd2YebJqSNWjES"',
@@ -24,7 +22,18 @@ esbuild.build({
   },
   jsxFactory: 'React.createElement',
   jsxFragment: 'React.Fragment',
-  bundle: true,
-  external: [],
-  platform: 'browser'
+  inject: ['./src/react-shim.js'],
+  banner: {
+    js: `
+      if (typeof window !== 'undefined') {
+        window.global = window;
+        window.process = { env: { NODE_ENV: 'production' } };
+      }
+    `
+  },
+  footer: {
+    js: `
+      window.VoiceflowChat = VoiceflowChat.default || VoiceflowChat;
+    `
+  }
 }).catch(() => process.exit(1)); 
