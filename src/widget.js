@@ -2,7 +2,7 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import ChatBot from './components/ChatBot/ChatBot';
 
-class VoiceflowChat {
+class VoiceflowChatWidget {
   constructor(config = {}) {
     this.config = {
       apiKey: config.apiKey,
@@ -24,15 +24,19 @@ class VoiceflowChat {
     // Initialize React
     const root = createRoot(container);
     root.render(
-      <ChatBot 
-        apiKey={this.config.apiKey}
-        projectId={this.config.projectId}
-        versionId={this.config.versionId}
-        theme={this.config.theme}
-      />
+      React.createElement(ChatBot, {
+        apiKey: this.config.apiKey,
+        projectId: this.config.projectId,
+        versionId: this.config.versionId,
+        theme: this.config.theme
+      })
     );
   }
 }
 
-// Make it available globally
-window.VoiceflowChat = VoiceflowChat; 
+// Export to window object
+if (typeof window !== 'undefined') {
+  window.VoiceflowChat = VoiceflowChatWidget;
+}
+
+export default VoiceflowChatWidget; 

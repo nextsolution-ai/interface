@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat Widget Test</title>
+</head>
+<body>
+    <h1>Test Page</h1>
+    
+    <script src="../dist/voiceflow-chat.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const chat = new VoiceflowChat({
+          apiKey: 'VF.DM.67c85533afdb459652c6488d.s4Xd2YebJqSNWjES',
+          projectId: '67c855152108cc3a1af64b96',
+          versionId: '67c855152108cc3a1af64b97'
+        });
+        chat.init();
+      });
+    </script>
+</body>
+</html> 

@@ -23,5 +23,8 @@ esbuild.build({
     'process.env.REACT_APP_VERSION_ID': '"67c855152108cc3a1af64b97"'
   },
   jsxFactory: 'React.createElement',
-  jsxFragment: 'React.Fragment'
+  jsxFragment: 'React.Fragment',
+  bundle: true,
+  external: [],
+  platform: 'browser'
 }).catch(() => process.exit(1)); 
